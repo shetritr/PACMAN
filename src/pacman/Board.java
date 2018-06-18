@@ -1,10 +1,13 @@
 package pacman;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Board {
 
-	public int [] [] firstArray=new int [32][32];
+
+
+	private int [] [] BoardArray=new int [32][32];
 
 	public Board(int numBoard){
 		setUpMyCSVArray(numBoard);
@@ -30,7 +33,7 @@ public class Board {
 /**Open the file and scans it.
  * @param scanIn-the scanner.
  * @param inputLine-the string of one line from the file.
- * @param path-the path of the file.
+ * @param fileName-the path of the file.
  */
 	private void readFile(Scanner scanIn, String inputLine, String fileName){
 		int row=0;
@@ -40,17 +43,21 @@ public class Board {
 			while(scanIn.hasNext()){
 				inputLine=scanIn.nextLine();
 				String [] parts=inputLine.split(",");
-			for(int i=0 ; i < 32 ; i++)
-				firstArray[row][i]=Integer.parseInt(parts[i]);//make int from string.
-			row++;
+				BoardArray[row]= Arrays.asList(parts).stream().mapToInt(Integer::parseInt).toArray();//make int from string.
+				row++;
 			}
 		}
 			catch(Exception e){//if the file wasn't found.
 				System.err.println("couldn't find the file.");
 			}
 	}//close readFile
-	
-	public static void main(String[] args) {
-		new Board(1);
+
+	public void setBoardArray(int x,int y,int upgrade) {
+		this.BoardArray[x][y] = upgrade;
+	}
+
+	public int[][] getBoardArray() {
+
+		return BoardArray;
 	}
 }

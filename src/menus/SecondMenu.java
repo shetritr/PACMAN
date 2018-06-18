@@ -42,6 +42,7 @@ public class SecondMenu extends JFrame implements ActionListener{
 		}
 		if (e.getSource().equals(level1)){//return to the main menu when button back is pressed.
 			new level1();
+			dispose();
 
 		}
 	}
